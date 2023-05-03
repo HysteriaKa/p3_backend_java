@@ -1,11 +1,4 @@
-CREATE TABLE `USERS` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
-  `email` varchar(255),
-  `name` varchar(255),
-  `password` varchar(255),
-  `created_at` timestamp,
-  `updated_at` timestamp
-);
+
 
 CREATE TABLE `RENTALS` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,

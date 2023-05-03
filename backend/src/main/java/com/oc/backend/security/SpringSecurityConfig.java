@@ -6,25 +6,28 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-
+  private JwtTokenProvider jwtTokenProvider;
 
   @Override
   public void configure (HttpSecurity http) throws Exception{
     http.csrf().disable();
+    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    http.authorizeRequests()//
+      .antMatchers("/auth/register").permitAll()//
+      .antMatchers("/auth/login").permitAll()//
 
-  http.authorizeRequests()//
-    .antMatchers("/auth/register").permitAll()//
-    .antMatchers("/auth/login").permitAll()//
-    // Disallow everything else..
-    .anyRequest().authenticated();
+      // Disallow everything else..
+      .anyRequest().authenticated();
     // If a user try to access a resource without having enough permissions
-    http.exceptionHandling().accessDeniedPage("/login");
+    http.exceptionHandling().accessDeniedPage("/auth/login");
+    http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
   }
   @Bean
   public PasswordEncoder passwordEncoder() {

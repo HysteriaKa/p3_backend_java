@@ -6,6 +6,21 @@ import javax.persistence.Id;
 @Entity
 @Table(name = "users")
 public class User {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name ="id")
+  private int id;
+  @Column(name ="email",nullable = false)
+  private String email;
+  @Column(name ="name")
+  private String name;
+  @Column(name ="password")
+  private String password;
+  @Column(name ="created_at")
+  private String createdAt;
+  @Column(name ="updated_at")
+  private String updatedAt;
   public int getId() {
     return id;
   }
@@ -54,18 +69,5 @@ public class User {
     this.updatedAt = updatedAt;
   }
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name ="id")
-  private int id;
-  @Column(name ="email")
-  private String email;
-  @Column(name ="name")
-  private String name;
-  @Column(name ="password")
-  private String password;
-  @Column(name ="created_at")
-  private String createdAt;
-  @Column(name ="updated_at")
-  private String updatedAt;
+
 }
