@@ -8,8 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 @RestController
-@RequestMapping("/users")
+@RequestMapping()
 @RequiredArgsConstructor
+
 public class UserController {
   private final UserService userService;
   private final ModelMapper modelMapper;
@@ -19,7 +20,7 @@ public class UserController {
     return userService.signin(email, password);
   }
 
-  @PostMapping("/auth/register")
+ @PostMapping("/auth/register")
   public String signup(@RequestBody UserDataDTO user) {
     return userService.signup(modelMapper.map(user, User.class));
   }

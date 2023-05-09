@@ -1,11 +1,20 @@
 package com.oc.backend.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
-import javax.persistence.Id;
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "users")
-public class User {
+@NoArgsConstructor
+@AllArgsConstructor
+public class User implements UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +27,9 @@ public class User {
   @Column(name ="password")
   private String password;
   @Column(name ="created_at")
-  private String createdAt;
+  private LocalDate createdAt;
   @Column(name ="updated_at")
-  private String updatedAt;
+  private LocalDate updatedAt;
   public int getId() {
     return id;
   }
@@ -53,21 +62,52 @@ public class User {
     this.password = password;
   }
 
-  public String getCreatedAt() {
+  public LocalDate getCreatedAt() {
     return createdAt;
   }
 
-  public void setCreatedAt(String createdAt) {
+  public void setCreatedAt(LocalDate createdAt) {
     this.createdAt = createdAt;
   }
 
-  public String getUpdatedAt() {
+  public LocalDate getUpdatedAt() {
     return updatedAt;
   }
 
-  public void setUpdatedAt(String updatedAt) {
+  public void setUpdatedAt(LocalDate updatedAt) {
     this.updatedAt = updatedAt;
   }
 
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return new HashSet<>();
+  }
+
+
+
+  @Override
+  public String getUsername() {
+    return email;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
 
 }
