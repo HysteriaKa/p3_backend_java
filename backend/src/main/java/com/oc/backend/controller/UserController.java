@@ -1,32 +1,22 @@
 package com.oc.backend.controller;
 
-import com.oc.backend.dto.UserDataDTO;
-import com.oc.backend.dto.UserResponseDTO;
 import com.oc.backend.model.User;
 import com.oc.backend.service.UserService;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 @RestController
-@RequestMapping()
-@RequiredArgsConstructor
+//@RequestMapping("/api/user")
+
 
 public class UserController {
-  private final UserService userService;
-  private final ModelMapper modelMapper;
-@PostMapping("/auth/login")
-  public String login( @RequestParam String email, @RequestParam String password){
+  @Autowired
+  private UserService userService;
 
-    return userService.signin(email, password);
-  }
 
- @PostMapping("/auth/register")
-  public String signup(@RequestBody UserDataDTO user) {
-    return userService.signup(modelMapper.map(user, User.class));
-  }
-
-  @GetMapping(value = "/{email}")
-  public UserResponseDTO search(@PathVariable String email) {
-    return modelMapper.map(userService.search(email), UserResponseDTO.class);
+  @GetMapping("/{id}")
+  public User getUserById(@PathVariable Integer id) {
+    return userService.getUserById(id);
   }
 }
