@@ -17,15 +17,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity()
-public class SpringSecurityConfig{
-  private static final String[] ACCEPTED_URLS= {
-    "/v3/api-docs/**",
-    "/swagger-ui/**",
-    "/swagger-ui.html",
-    "/auth/**",
-    "/resources/static/**",
-    "/static/**"
-  };
+
+public class SpringSecurityConfig {
+private static final String[] PERMIT_URLS = {
+  "/v3/api-docs/**",
+  "/swagger-ui/**",
+  "/swagger-ui.html",
+  "/auth/**",
+  "/resources/static/**",
+  "/static/**"
+};
+
 
   @Bean
   public JwtAuthenticationFilter authTokenFilter() {
@@ -37,31 +39,30 @@ public class SpringSecurityConfig{
     return new BCryptPasswordEncoder();
   }
 
+
   @Bean
-  public AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder, UserService userDetailsService)
+  public AuthenticationManager authenticationManager(HttpSecurity http, PasswordEncoder passwordEncoder, UserService userDetailsService)
     throws Exception {
-    return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
+    return http.getSharedObject(AuthenticationManagerBuilder.class)
       .userDetailsService(userDetailsService)
       .passwordEncoder(passwordEncoder)
       .and()
       .build();
   }
 
-  @Bean
-  public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-    httpSecurity.cors()
+@Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    http.cors()
       .and()
       .csrf()
       .disable()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
       .and()
-      .authorizeHttpRequests().antMatchers(ACCEPTED_URLS).permitAll()
+      .authorizeHttpRequests().antMatchers(PERMIT_URLS).permitAll()
       .antMatchers("/api/**").authenticated()
       .anyRequest().authenticated();
-    httpSecurity.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
-    return httpSecurity.build();
-  }
-
+    http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    return http.build();
+}
 
 }

@@ -1,6 +1,8 @@
 package com.oc.backend.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,8 +14,10 @@ import java.util.HashSet;
 
 @Entity
 @Table(name = "users")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class User implements UserDetails {
 
   @Id
@@ -30,60 +34,16 @@ public class User implements UserDetails {
   private LocalDate createdAt;
   @Column(name ="updated_at")
   private LocalDate updatedAt;
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public LocalDate getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(LocalDate createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public LocalDate getUpdatedAt() {
-    return updatedAt;
-  }
-
-  public void setUpdatedAt(LocalDate updatedAt) {
-    this.updatedAt = updatedAt;
-  }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return new HashSet<>();
   }
 
-
+  @Override
+  public String getPassword() {
+    return password;
+  }
 
   @Override
   public String getUsername() {
@@ -109,5 +69,8 @@ public class User implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
+
+
+
 
 }
