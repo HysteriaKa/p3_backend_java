@@ -4,6 +4,7 @@ import com.oc.backend.dto.AuthRequest;
 import com.oc.backend.dto.AuthResponse;
 import com.oc.backend.dto.RegisterRequest;
 import com.oc.backend.service.AuthService;
+import com.oc.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
   private final AuthService service;
+  private UserService userService;
 @PostMapping("/register")
 public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
   return ResponseEntity.ok(service.register(request));
@@ -26,9 +28,11 @@ public ResponseEntity<AuthResponse> authenticate(@RequestBody AuthRequest reques
   return ResponseEntity.ok(service.authenticate(request));
 }
 //@GetMapping("/me")
-//public UserDetails getMe(@RequestBody UserDetails userDetails){
+//public UserDetails getMe(@RequestBody UserDetails user){
+
   //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-  //userDetails = (UserDetails) authentication.getPrincipal();
-  //return null;
+  //String connected = authentication.getName();
+  //user = userService.loadUserByUsername(connected);
+   //return (UserDetails) ResponseEntity.ok( user );
 //}
 }
