@@ -23,7 +23,8 @@ private static final String[] PERMIT_URLS = {
   "/v2/api-docs/**",
   "/swagger-ui/**",
   "/swagger-ui.html",
-  "/auth/**",
+  "/auth/register",
+  "/auth/login",
   "/resources/static/**",
   "/static/**"
 };
