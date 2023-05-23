@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 public class SpringSecurityConfig {
 private static final String[] PERMIT_URLS = {
-  "/v3/api-docs/**",
+  "/v2/api-docs/**",
   "/swagger-ui/**",
   "/swagger-ui.html",
   "/auth/**",
