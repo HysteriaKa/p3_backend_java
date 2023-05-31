@@ -3,14 +3,12 @@ package com.oc.backend.controller;
 import com.oc.backend.dto.AuthRequest;
 import com.oc.backend.dto.AuthResponse;
 import com.oc.backend.dto.RegisterRequest;
+import com.oc.backend.dto.UserDTO;
 import com.oc.backend.service.AuthService;
 import com.oc.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -18,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
   private final AuthService service;
-  private UserService userService;
+  private final UserService userService;
 @PostMapping("/register")
 public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request){
   return ResponseEntity.ok(service.register(request));
@@ -27,12 +25,15 @@ public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest reques
 public ResponseEntity<AuthResponse> authenticate(@RequestBody AuthRequest request){
   return ResponseEntity.ok(service.authenticate(request));
 }
-//@GetMapping("/me")
-//public UserDetails getMe(@RequestBody UserDetails user){
+  @GetMapping("/me")
+  public ResponseEntity<?> getMe() {
+    UserDTO userDTO = userService.getConnectedUser();
+    if (userDTO != null) {
+      return ResponseEntity.ok(userDTO);
+    }
+    return ResponseEntity
+      .badRequest()
+      .body("Unknown User !");
+  }
 
-  //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-  //String connected = authentication.getName();
-  //user = userService.loadUserByUsername(connected);
-   //return (UserDetails) ResponseEntity.ok( user );
-//}
 }

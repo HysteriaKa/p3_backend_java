@@ -1,8 +1,8 @@
 package com.oc.backend.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -22,4 +22,5 @@ public class Rental {
   private Date createdAt;
   @Column(name = "updated_at")
   private Date updatedAt;
+
 }

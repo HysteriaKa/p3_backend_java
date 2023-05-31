@@ -23,7 +23,8 @@ private static final String[] PERMIT_URLS = {
   "/v3/api-docs/**",
   "/swagger-ui/**",
   "/swagger-ui.html",
-  "/auth/**",
+  "/auth/register",
+  "/auth/login",
   "/resources/static/**",
   "/static/**"
 };
@@ -58,8 +59,8 @@ private static final String[] PERMIT_URLS = {
       .disable()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
       .and()
-      .authorizeHttpRequests().antMatchers(PERMIT_URLS).permitAll()
-      .antMatchers("/api/**").authenticated()
+      .authorizeHttpRequests().requestMatchers(PERMIT_URLS).permitAll()
+      .requestMatchers("/api/**").authenticated()
       .anyRequest().authenticated();
     http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     return http.build();
