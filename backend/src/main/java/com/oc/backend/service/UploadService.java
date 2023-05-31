@@ -30,6 +30,10 @@ public class UploadService {
     }
   }
 
+  public Path getPathFile(){
+    return this.fileStorageLocation;
+  }
+
   private String getFileExtension(String fileName) {
     if (fileName == null) {
       return null;
@@ -39,10 +43,8 @@ public class UploadService {
     return fileNameParts[fileNameParts.length - 1];
   }
 
-  public String storeFile(MultipartFile file) {
+  public String storeFile(MultipartFile file, String fileName) {
     // Normalize file name
-    String fileName =
-      new Date().getTime() + "-file." + getFileExtension(file.getOriginalFilename());
 
     try {
       // Check if the filename contains invalid characters

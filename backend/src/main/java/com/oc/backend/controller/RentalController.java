@@ -5,8 +5,11 @@ import com.oc.backend.model.Rental;
 import com.oc.backend.service.RentalService;
 import com.oc.backend.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.nio.file.Path;
 
 @RestController
 @RequestMapping("/api/rentals")
@@ -33,11 +36,12 @@ public class RentalController {
   @PostMapping
   public Rental addNewRental(@ModelAttribute RentalDTO newRental, @RequestParam("picture") MultipartFile file) {
     String fileName = file.getOriginalFilename();
-    System.out.println(fileName);
-    System.out.println(newRental);
-    file = new UploadService(newRental.getPicture());
-// return rentalService.addNewRental(newRental);
-return null;
+    String path = uploadService.getPathFile() + fileName;
+    uploadService.storeFile(file,fileName);
+    Rental rental = Rental.fromDTO(newRental );
+//    System.out.println(path);
+     return rentalService.addNewRental(rental);
+
   }
   @PutMapping("/{id}")
   public Rental updateRental(@RequestBody Rental updateRental, @PathVariable Long id) {
