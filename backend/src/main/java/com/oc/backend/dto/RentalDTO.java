@@ -5,11 +5,41 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.sql.Date;
+
 @Data
 public class RentalDTO implements Serializable {
   private Long id;
   private String name;
+  private Date created_at;
 
+  private Date updated_at;
+  private int surface;
+  private int price;
+  private String description;
+  private int owner_id;
+  private MultipartFile picture;
+
+  public RentalDTO(){};
+
+  public RentalDTO(Long id, String name, Date created_at, Date updated_at, int surface, int price, String description, int owner_id, MultipartFile picture ) {
+    this.id = id;
+    this.name = name;
+    this.created_at =created_at;
+    this.updated_at = updated_at;
+    this.price = price;
+    this.description = description;
+    this.surface = surface;
+    this.picture = picture;
+    this.owner_id = owner_id;
+  }
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
   public String getName() {
     return name;
   }
@@ -72,35 +102,6 @@ public class RentalDTO implements Serializable {
 
   public void setPicture(MultipartFile picture) {
     this.picture = picture;
-  }
-
-  private LocalDate created_at;
-
-  private LocalDate updated_at;
-  private int surface;
-  private int price;
-  private String description;
-  private int owner_id;
-  private MultipartFile picture;
-  public RentalDTO(){};
-  public RentalDTO(Long id, String name, LocalDate created_at,LocalDate updated_at,int surface,int price,String description,int owner_id,MultipartFile picture ) {
-    this.id = id;
-    this.name = name;
-    this.created_at =created_at;
-    this.updated_at = updated_at;
-    this.price =price;
-    this.description =description;
-    this.surface= surface;
-    this.picture = picture;
-    this.owner_id = owner_id;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 }
 
