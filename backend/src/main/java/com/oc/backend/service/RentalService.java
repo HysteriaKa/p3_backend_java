@@ -22,6 +22,7 @@ public class RentalService {
     return rentalRepository.findAll();
   }
   public Rental addNewRental(Rental newRental){
+
     return rentalRepository.save(newRental);
   }
   public Rental updateRental(Rental rentalUpdate, Long id) {
