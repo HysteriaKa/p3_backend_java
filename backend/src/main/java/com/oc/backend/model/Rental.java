@@ -2,6 +2,7 @@ package com.oc.backend.model;
 
 import com.oc.backend.dto.RentalDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.nio.file.Paths;
@@ -14,11 +15,17 @@ public class Rental {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @NotBlank
   private String name;
+  @NotBlank
   private int surface;
+  @NotBlank
   private double price;
+  @NotBlank
   private String picture;
+  @NotBlank
   private String description;
+  @NotBlank
   private int owner_id;
   @Column(name = "created_at")
   private Date createdAt;

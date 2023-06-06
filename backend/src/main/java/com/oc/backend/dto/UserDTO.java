@@ -1,5 +1,7 @@
 package com.oc.backend.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -7,7 +9,7 @@ public class UserDTO implements Serializable {
   private Long id;
 
   private String email;
-
+  @NotBlank
   private String name;
 
   private LocalDate created_at;

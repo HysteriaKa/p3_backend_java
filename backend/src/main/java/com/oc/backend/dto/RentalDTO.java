@@ -1,5 +1,6 @@
 package com.oc.backend.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,14 +11,19 @@ import java.sql.Date;
 @Data
 public class RentalDTO implements Serializable {
   private Long id;
+  @NotBlank
   private String name;
   private Date created_at;
-
   private Date updated_at;
+  @NotBlank
   private int surface;
+  @NotBlank
   private int price;
+  @NotBlank
   private String description;
+  @NotBlank
   private int owner_id;
+  @NotBlank
   private MultipartFile picture;
 
   public RentalDTO(){};

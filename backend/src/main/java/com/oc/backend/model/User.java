@@ -1,5 +1,6 @@
 package com.oc.backend.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,8 +33,10 @@ public class User implements UserDetails {
   @Column(name ="email",nullable = false)
   private String email;
   @Column(name ="name")
+  @NotBlank
   private String name;
   @Column(name ="password")
+  @NotBlank
   private String password;
   @Column(name ="created_at")
   private LocalDate createdAt;

@@ -28,7 +28,7 @@ public class AuthService {
     userRepository.save(user);
     var jwtToken = jwtService.generateToken(user);
     return AuthResponse.builder()
-      .bearerToken(jwtToken)
+      .token(jwtToken)
       .build();
   }
 
@@ -42,7 +42,7 @@ public class AuthService {
     var user = userRepository.findByEmail(request.getLogin()).orElseThrow();
     var jwtToken = jwtService.generateToken(user);
     return AuthResponse.builder()
-      .bearerToken(jwtToken)
+      .token(jwtToken)
       .build();
   }
 

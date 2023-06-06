@@ -1,5 +1,6 @@
 package com.oc.backend.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import jakarta.persistence.Column;
@@ -21,7 +22,10 @@ public class Message {
   private Date createdAt;
   @Column(name = "updated_at")
   private Date updatedAt;
+  @NotBlank
   private String message;
+  @NotBlank
   private int rental_id;
+  @NotBlank
   private int user_id;
 }

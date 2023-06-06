@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthResponse {
 
-  @JsonProperty("Bearer")
-  private String bearerToken;
+  @JsonProperty("token")
+  private String token;
 }

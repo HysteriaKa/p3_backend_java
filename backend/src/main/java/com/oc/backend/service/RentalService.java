@@ -3,6 +3,8 @@ package com.oc.backend.service;
 import com.oc.backend.exception.RentalNotFoundException;
 import com.oc.backend.model.Rental;
 import com.oc.backend.repository.RentalRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,7 +14,6 @@ public class RentalService {
   public RentalService(RentalRepository rentalRepository) {
     this.rentalRepository = rentalRepository;
   }
-
   public Rental getRentalById(Long id) {
     return rentalRepository
       .findById(id)
