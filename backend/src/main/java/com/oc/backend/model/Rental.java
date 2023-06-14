@@ -17,32 +17,15 @@ public class Rental {
   private Long id;
   @NotBlank
   private String name;
-  @NotBlank
   private int surface;
-  @NotBlank
   private double price;
   @NotBlank
   private String picture;
   @NotBlank
   private String description;
-  @NotBlank
   private int owner_id;
   @Column(name = "created_at")
   private Date createdAt;
   @Column(name = "updated_at")
   private Date updatedAt;
-
-  public static Rental fromDTO(RentalDTO dto) {
-    Rental rental = new Rental();
-    rental.setId(dto.getId());
-    rental.setName(dto.getName());
-    rental.setCreatedAt(dto.getCreated_at());
-    rental.setUpdatedAt(dto.getUpdated_at());
-    rental.setSurface(dto.getSurface());
-    rental.setPrice(dto.getPrice());
-    rental.setDescription(dto.getDescription());
-    rental.setOwner_id(dto.getOwner_id());
-    rental.setPicture(Paths.get( "./uploads/files").toAbsolutePath().normalize() + dto.getPicture().getOriginalFilename());
-    return rental;
-  }
 }

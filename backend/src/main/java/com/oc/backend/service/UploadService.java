@@ -1,64 +1,50 @@
 package com.oc.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.webjars.NotFoundException;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
+import java.util.Objects;
 
 @Service
 public class UploadService {
 
-  private final Path fileStorageLocation;
+//  private final Path fileStorageLocation;
+  @Value("${upload.path.img}")
+  private String uploadPath;
 
-  @Autowired
-  public UploadService(Environment env) {
-    this.fileStorageLocation = Paths.get(env.getProperty("app.file.upload-dir", "./uploads/files"))
-      .toAbsolutePath().normalize();
 
-    try {
-      Files.createDirectories(this.fileStorageLocation);
-    } catch (Exception ex) {
-      throw new RuntimeException(
-        "Could not create the directory where the uploaded files will be stored.", ex);
+  public String saveFile(MultipartFile file) {
+    if (file == null) {
+      return "http://localhost:8080/api/" + uploadPath + "/" + "file_not_exist";
+
     }
-  }
 
-  public Path getPathFile(){
-    return this.fileStorageLocation;
-  }
-
-  private String getFileExtension(String fileName) {
-    if (fileName == null) {
-      return null;
+    File uploadDirectory = new File(uploadPath);
+    if (!uploadDirectory.exists()) {
+      uploadDirectory.mkdirs();
     }
-    String[] fileNameParts = fileName.split("\\.");
-
-    return fileNameParts[fileNameParts.length - 1];
-  }
-
-  public String storeFile(MultipartFile file, String fileName) {
-    // Normalize file name
-
     try {
-      // Check if the filename contains invalid characters
-      if (fileName.contains("..")) {
-        throw new RuntimeException(
-          "Sorry! Filename contains invalid path sequence " + fileName);
-      }
+      Path paths = Paths.get(uploadPath).toAbsolutePath().normalize();
+      Path targetLocation = paths.resolve(Objects.requireNonNull(file.getOriginalFilename()));
 
-      Path targetLocation = this.fileStorageLocation.resolve(fileName);
       Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-      return fileName;
-    } catch (IOException ex) {
-      throw new RuntimeException("Could not store file " + fileName + ". Please try again!", ex);
+      return "http://localhost:8080/api/" + uploadPath + "/" + file.getOriginalFilename();
+    } catch (IOException e) {
+      throw  new NotFoundException("Could not store file " + file.getOriginalFilename() + ". Please try again!");
     }
+
   }
+
 }

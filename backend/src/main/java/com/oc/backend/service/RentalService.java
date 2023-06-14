@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.stereotype.Service;
 
+import java.lang.Iterable;
+
 @Service
 public class RentalService {
 
@@ -19,9 +21,9 @@ public class RentalService {
       .findById(id)
       .orElseThrow(() -> new RentalNotFoundException(id));
   }
-  public Iterable<Rental> getAllRentals(){
+  public Iterable<Rental> getAllRentals() {
     return rentalRepository.findAll();
-  }
+}
   public Rental addNewRental(Rental newRental){
 
     return rentalRepository.save(newRental);

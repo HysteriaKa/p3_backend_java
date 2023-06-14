@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { User } from 'src/app/interfaces/user.interface';
 import { SessionService } from 'src/app/services/session.service';
 import { RentalsService } from '../../services/rentals.service';
+import { Subscription, Observable  } from 'rxjs';
+import { RentalsResponse } from '../../interfaces/api/rentalsResponse.interface';
 
 @Component({
   selector: 'app-list',

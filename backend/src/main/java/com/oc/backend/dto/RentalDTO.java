@@ -8,6 +8,12 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.sql.Date;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.net.URI;
+import com.oc.backend.model.Rental;
+import com.oc.backend.repository.RentalRepository;
+
 @Data
 public class RentalDTO implements Serializable {
   private Long id;
@@ -23,9 +29,7 @@ public class RentalDTO implements Serializable {
   private String description;
   @NotBlank
   private int owner_id;
-  @NotBlank
   private MultipartFile picture;
-
   public RentalDTO(){};
 
   public RentalDTO(Long id, String name, Date created_at, Date updated_at, int surface, int price, String description, int owner_id, MultipartFile picture ) {
@@ -108,6 +112,18 @@ public class RentalDTO implements Serializable {
 
   public void setPicture(MultipartFile picture) {
     this.picture = picture;
+  }
+
+  public  Rental fromDTO(RentalDTO rentalDTO) {
+      Rental rental = new Rental();
+      rental.setName(rentalDTO.getName());
+      rental.setCreatedAt(rentalDTO.getCreated_at());
+      rental.setUpdatedAt(rentalDTO.getUpdated_at());
+      rental.setSurface(rentalDTO.getSurface());
+      rental.setPrice(rentalDTO.getPrice());
+      rental.setDescription(rentalDTO.getDescription());
+      rental.setOwner_id(rentalDTO.getOwner_id());
+      return rental;
   }
 }
 

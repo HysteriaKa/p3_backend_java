@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/api/rentals")
@@ -24,7 +25,7 @@ public class RentalController {
   @Autowired
   private RentalService rentalService;
   @Autowired
-  private final UploadService uploadService;
+  private  UploadService uploadService;
 
   public RentalController(UploadService uploadService) {
     this.uploadService = uploadService;
@@ -32,11 +33,11 @@ public class RentalController {
 
 
   @GetMapping
-
   @Operation(summary = "Get all rentals")
   public Iterable<Rental> getAllRentals(){
     return rentalService.getAllRentals();
   }
+
   @GetMapping("/{id}")
   @Operation(summary = "Get a book by its id")
   @ApiResponses(value = {
@@ -52,6 +53,7 @@ public class RentalController {
   public Rental getOneRental(@Parameter(description = "id of rental to be searched") @PathVariable Long id){
     return rentalService.getRentalById(id);
   }
+
   @PostMapping
   @Operation(summary = "Post a new Rental")
   @ApiResponses(value = {
@@ -64,13 +66,11 @@ public class RentalController {
       content = @Content),
     @ApiResponse(responseCode = "404", description = "Rental not found",
       content = @Content) })
-  public Rental addNewRental(@ModelAttribute RentalDTO newRental, @RequestParam("picture") MultipartFile file) {
-    String fileName = file.getOriginalFilename();
-    String path = uploadService.getPathFile() + fileName;
-    uploadService.storeFile(file,fileName);
-    Rental rental = Rental.fromDTO(newRental );
-//    System.out.println(path);
-     return rentalService.addNewRental(rental);
+  public Rental addNewRental(@ModelAttribute("rental") RentalDTO rentalDTO) {
+    String pictureUrl = uploadService.saveFile(rentalDTO.getPicture());
+    Rental rental = rentalDTO.fromDTO(rentalDTO);
+    rental.setPicture(pictureUrl);
+    return rentalService.addNewRental(rental);
 
   }
   @PutMapping("/{id}")
