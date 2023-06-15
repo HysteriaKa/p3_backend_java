@@ -3,11 +3,17 @@ package com.oc.backend.service;
 import com.oc.backend.exception.RentalNotFoundException;
 import com.oc.backend.model.Rental;
 import com.oc.backend.repository.RentalRepository;
+
+import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.stereotype.Service;
 
 import java.lang.Iterable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class RentalService {
@@ -22,8 +28,12 @@ public class RentalService {
       .orElseThrow(() -> new RentalNotFoundException(id));
   }
   public Iterable<Rental> getAllRentals() {
+    // List<Rental> rentals = new ArrayList<Rental>();
+    // rentalRepository.findAll().forEach(rental->rentals.add(rental));
+    // return rentals;
+
     return rentalRepository.findAll();
-}
+  }
   public Rental addNewRental(Rental newRental){
 
     return rentalRepository.save(newRental);
