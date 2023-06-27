@@ -117,8 +117,8 @@ public class RentalDTO implements Serializable {
   public  Rental fromDTO(RentalDTO rentalDTO) {
       Rental rental = new Rental();
       rental.setName(rentalDTO.getName());
-      rental.setCreatedAt(rentalDTO.getCreated_at());
-      rental.setUpdatedAt(rentalDTO.getUpdated_at());
+      rental.setCreated_at(rentalDTO.getCreated_at());
+      rental.setUpdated_at(rentalDTO.getUpdated_at());
       rental.setSurface(rentalDTO.getSurface());
       rental.setPrice(rentalDTO.getPrice());
       rental.setDescription(rentalDTO.getDescription());

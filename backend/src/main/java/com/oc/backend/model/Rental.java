@@ -28,8 +28,8 @@ public class Rental {
   private int owner_id;
   @CreationTimestamp
   @Column(name = "created_at")
-  private Date createdAt;
+  private Date created_at;
   @UpdateTimestamp
   @Column(name = "updated_at")
-  private Date updatedAt;
+  private Date updated_at;
 }
