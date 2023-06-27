@@ -4,6 +4,8 @@ import com.oc.backend.dto.RentalDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.nio.file.Paths;
 import java.sql.Date;
@@ -24,8 +26,10 @@ public class Rental {
   @NotBlank
   private String description;
   private int owner_id;
+  @CreationTimestamp
   @Column(name = "created_at")
   private Date createdAt;
+  @UpdateTimestamp
   @Column(name = "updated_at")
   private Date updatedAt;
 }
