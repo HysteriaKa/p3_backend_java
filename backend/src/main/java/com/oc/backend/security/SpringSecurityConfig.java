@@ -26,6 +26,7 @@ private static final String[] PERMIT_URLS = {
   "/api/auth/register",
   "/api/auth/login",
   "/resources/static/**",
+  "/api/files/**",
   "/static/**"
 };
 

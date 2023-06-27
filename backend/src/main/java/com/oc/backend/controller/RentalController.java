@@ -17,6 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/rentals")
@@ -31,12 +35,13 @@ public class RentalController {
     this.uploadService = uploadService;
   }
 
-
   @GetMapping
   @Operation(summary = "Get all rentals")
-  public Iterable<Rental> getAllRentals(){
-    return rentalService.getAllRentals();
-  }
+  public Map<String, Iterable<Rental>> getAllRentals() {
+    Map<String, Iterable<Rental>> rentalForm = new HashMap<>();
+    rentalForm.put("rentals", rentalService.getAllRentals());
+    return rentalForm;
+}
 
   @GetMapping("/{id}")
   @Operation(summary = "Get a book by its id")
