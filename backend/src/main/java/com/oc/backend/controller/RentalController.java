@@ -37,7 +37,7 @@ public class RentalController {
 
   @GetMapping
   @Operation(summary = "Get all rentals")
-public Map<String, Iterable<Rental>> getAllRentals() {
+  public Map<String, Iterable<Rental>> getAllRentals() {
     Map<String, Iterable<Rental>> rentalForm = new HashMap<>();
     rentalForm.put("rentals", rentalService.getAllRentals());
     return rentalForm;
