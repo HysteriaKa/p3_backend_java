@@ -90,8 +90,9 @@ public class RentalController {
       content = @Content),
     @ApiResponse(responseCode = "404", description = "Rental not found",
       content = @Content) })
-  public Rental updateRental(@RequestBody Rental updateRental, @PathVariable Long id) {
-    return rentalService.updateRental(updateRental, id);
+  public Rental updateRental(@ModelAttribute("rental") RentalDTO rentalDTO, @PathVariable Long id) {
+    Rental rental = rentalDTO.fromDTO(rentalDTO);
+    return rentalService.updateRental(rental, id);
   }
 
 }

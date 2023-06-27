@@ -46,14 +46,16 @@ public class RentalService {
     return rentalRepository.save(newRental);
   }
   public Rental updateRental(Rental rentalUpdate, Long id) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String currentUserName = authentication.getName();
+    User user = userRepository.findByEmail(currentUserName).get();
     return rentalRepository
       .findById(id)
       .map(rental -> {
         rental.setName(rentalUpdate.getName());
         rental.setDescription(rentalUpdate.getDescription());
-        rental.setPicture(rentalUpdate.getPicture());
         rental.setSurface(rentalUpdate.getSurface());
-        rental.setOwner_id(rentalUpdate.getOwner_id());
+        rental.setOwner_id(user.getId());
         return rentalRepository.save(rental);
       })
       .orElseGet(() -> {
