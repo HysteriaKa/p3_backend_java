@@ -48,6 +48,7 @@ Launch Front-end:
 ### MySQL
 
 SQL script for creating the schema is available `ressources/sql/script.sql`
+Just import it in your Database tool
 
 ## SWAGGER DOCUMENTATION
 
