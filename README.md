@@ -9,11 +9,35 @@ Git clone:
 > git clone https://github.com/HysteriaKa/p3_backend_java
 
 ### Run back-end
+To integrate an existing Maven Java project into IDEA, follow these steps:
 
-In your IDE (exemple with IntelliJ)
-Select Open from the Welcome Screen, or the File menu, and navigate to the location of the code.
-You can select the root of the project and IntelliJ IDEA will figure out how to import the project, but if you specifically know this is a Maven project and you want to use this model for your project structure, it's simplest to select the top-level pom.xml file, and the IDE will know you mean to import a Maven project
+1. Open IntelliJ IDEA and close any existing project.
 
+2. From the Welcome screen, click Import Project.
+The Select File or Directory to Import dialog opens.
+
+3. Navigate to your Maven project and select the top-level folder. For example, with a project named "P3_backend_java":
+
+4. Click OK.
+5. For the Import project from external model value, select Maven and click Next.
+6. Select Import Maven projects automatically and leave the other fields with default values.
+7. Click Next.
+8. Next
+The Please select project SDK screen opens.
+9. Make sure the correct JDC is selected and click Next.
+10. Change the project name and location if you like, and click Finish.
+11. Create a run configuration to test your project:
+- From the Run menu, select Run.
+- Click Edit Configurations….
+- Make sure Maven is selected, and click + (Add New Configuration).
+- Select Maven
+- Give your configuration a name.
+- In the Comand line: field, enter lagom:runAll.
+- Click OK.
+
+12.Build your project and run it using the configuration you created.
+
+## Front-end
 Don't forget to install your node_modules before starting (`npm install`). 
 > npm install
 
@@ -46,9 +70,7 @@ For Postman import the collection
 
 > ressources/postman/rental.postman_collection.json 
 
-by following the documentation: 
 
-https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman
 
 
 ### MySQL
