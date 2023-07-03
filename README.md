@@ -48,3 +48,7 @@ Launch Front-end:
 ### MySQL
 
 SQL script for creating the schema is available `ressources/sql/script.sql`
+
+** SWAGGER DOCUMENTATION
+
+"http://localhost/swagger-ui.html"
