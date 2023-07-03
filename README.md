@@ -49,6 +49,6 @@ Launch Front-end:
 
 SQL script for creating the schema is available `ressources/sql/script.sql`
 
-** SWAGGER DOCUMENTATION
+## SWAGGER DOCUMENTATION
 
 "http://localhost/swagger-ui.html"
