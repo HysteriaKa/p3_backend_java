@@ -6,14 +6,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Git clone:
 
-> git clone https://github.com/OpenClassrooms-Student-Center/P3-Full-Stack-portail-locataire
+> git clone https://github.com/HysteriaKa/p3_backend_java
 
-Go inside folder:
+### Run back-end
 
-> cd P3-Full-Stack-portail-locataire
+In your IDE (exemple with IntelliJ)
+Select Open from the Welcome Screen, or the File menu, and navigate to the location of the code.
+You can select the root of the project and IntelliJ IDEA will figure out how to import the project, but if you specifically know this is a Maven project and you want to use this model for your project structure, it's simplest to select the top-level pom.xml file, and the IDE will know you mean to import a Maven project
 
-Install dependencies:
-
+Don't forget to install your node_modules before starting (`npm install`). 
 > npm install
 
 Launch Front-end:
