@@ -7,11 +7,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 @RequestMapping("/api/user")
 
@@ -22,16 +24,17 @@ public class UserController {
 
 
   @GetMapping("/{id}")
+  @SecurityRequirement(name = "Bearer Authentication")
   @Operation(summary = "Get one User by his Id")
   @ApiResponses(value = {
     @ApiResponse(responseCode = "200", description = "Return one User",
-      content = { @Content(mediaType = "application/json",
-        schema = @Schema(implementation = User.class)) }),
+      content = {@Content(mediaType = "application/json",
+        schema = @Schema(implementation = User.class))}),
     @ApiResponse(responseCode = "403", description = "Invalid credentials",
       content = {@Content(mediaType = "application/json",
-        schema=@Schema(implementation = User.class)) }),
+        schema = @Schema(implementation = User.class))}),
     @ApiResponse(responseCode = "404", description = "User not found",
-      content = @Content) })
+      content = @Content)})
   public User getUserById(@PathVariable Integer id) {
     return userService.getUserById(id);
   }

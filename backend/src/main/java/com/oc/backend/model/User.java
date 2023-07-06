@@ -1,5 +1,6 @@
 package com.oc.backend.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,12 +9,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
@@ -28,19 +23,19 @@ public class User implements UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name ="id")
+  @Column(name = "id")
   private int id;
-  @Column(name ="email",nullable = false)
+  @Column(name = "email", nullable = false)
   private String email;
-  @Column(name ="name")
+  @Column(name = "name")
   @NotBlank
   private String name;
-  @Column(name ="password")
+  @Column(name = "password")
   @NotBlank
   private String password;
-  @Column(name ="created_at")
+  @Column(name = "created_at")
   private LocalDate createdAt;
-  @Column(name ="updated_at")
+  @Column(name = "updated_at")
   private LocalDate updatedAt;
 
   @Override
@@ -77,8 +72,6 @@ public class User implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
-
-
 
 
 }

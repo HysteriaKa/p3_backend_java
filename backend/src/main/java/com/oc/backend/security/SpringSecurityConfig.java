@@ -19,16 +19,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity()
 
 public class SpringSecurityConfig {
-private static final String[] PERMIT_URLS = {
-  "/v3/api-docs/**",
-  "/swagger-ui/**",
-  "/swagger-ui.html",
-  "/api/auth/register",
-  "/api/auth/login",
-  "/resources/static/**",
-  "/api/files/**",
-  "/static/**"
-};
+  private static final String[] PERMIT_URLS = {
+    "/v3/api-docs/**",
+    "/swagger-ui/**",
+    "/swagger-ui.html",
+    "/api/auth/register",
+    "/api/auth/login",
+    "/resources/static/**",
+    "/api/files/**",
+    "/static/**"
+  };
 
 
   @Bean
@@ -52,8 +52,8 @@ private static final String[] PERMIT_URLS = {
       .build();
   }
 
-@Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.cors()
       .and()
       .csrf()
@@ -65,6 +65,6 @@ private static final String[] PERMIT_URLS = {
       .anyRequest().authenticated();
     http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     return http.build();
-}
+  }
 
 }
