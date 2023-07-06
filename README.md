@@ -1,6 +1,7 @@
 # Estate
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
+[Spring Boot](https://spring.io/projects/spring-boot) version 3.0.4.
 
 ## Start the project
 
@@ -38,7 +39,7 @@ The Please select project SDK screen opens.
 12.Build your project and run it using the configuration you created.
 
 ## Front-end
-Don't forget to install your node_modules before starting (`npm install`). 
+Install dependencies. 
 > npm install
 
 Launch Front-end:
@@ -46,9 +47,12 @@ Launch Front-end:
 > npm run start;
 
 ### MySQL
-
+In your Database tool :
+Create a table `ocrental` and give privileges to a user named `ocuser` with password `ocuser`
 SQL script for creating the schema is available `ressources/sql/script.sql`
-Just import it in your Database tool
+
+Or you can import the SQL file on the ZIP file and use all data by logging with 
+`test@test.fr` and `123456` password.
 
 ## SWAGGER DOCUMENTATION
 
