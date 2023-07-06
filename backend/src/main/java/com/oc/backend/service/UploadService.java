@@ -1,8 +1,6 @@
 package com.oc.backend.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.webjars.NotFoundException;
@@ -13,13 +11,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Date;
 import java.util.Objects;
 
 @Service
 public class UploadService {
 
-//  private final Path fileStorageLocation;
   @Value("${upload.path.img}")
   private String uploadPath;
 
@@ -42,7 +38,7 @@ public class UploadService {
 
       return "http://localhost:8080/api/" + uploadPath + "/" + file.getOriginalFilename();
     } catch (IOException e) {
-      throw  new NotFoundException("Could not store file " + file.getOriginalFilename() + ". Please try again!");
+      throw new NotFoundException("Could not store file " + file.getOriginalFilename() + ". Please try again!");
     }
 
   }

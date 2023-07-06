@@ -15,8 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.FileDescriptor;
-
 
 @Service
 @RequiredArgsConstructor
@@ -42,27 +40,26 @@ public class UserService implements UserDetailsService {
       user.getUpdatedAt());
 
   }
+
   public User getUserById(Integer id) {
     return userRepository
       .findById(id)
       .orElseThrow();
   }
+
   public UserDTO getConnectedUser() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     if (!(authentication instanceof AnonymousAuthenticationToken)) {
       String userName = authentication.getName();
-
-    System.out.println(authentication.getName());
+      System.out.println(authentication.getName());
       User user = userRepository.findByEmail(userName).orElseThrow(() -> new UsernameNotFoundException("User with this Mail not found"));
-    UserDTO userDTO = new UserDTO();
-    userDTO.setEmail(user.getEmail());
-    userDTO.setId(Long.valueOf(user.getId()));
-    userDTO.setName(user.getName());
-    userDTO.setCreated_at(user.getCreatedAt());
-    userDTO.setUpdated_at(user.getUpdatedAt());
-    return userDTO;
-
-
+      UserDTO userDTO = new UserDTO();
+      userDTO.setEmail(user.getEmail());
+      userDTO.setId(Long.valueOf(user.getId()));
+      userDTO.setName(user.getName());
+      userDTO.setCreated_at(user.getCreatedAt());
+      userDTO.setUpdated_at(user.getUpdatedAt());
+      return userDTO;
     }
     return null;
   }
