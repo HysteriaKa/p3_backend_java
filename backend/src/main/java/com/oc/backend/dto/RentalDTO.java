@@ -1,5 +1,6 @@
 package com.oc.backend.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.oc.backend.model.Rental;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
