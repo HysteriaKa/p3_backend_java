@@ -50,6 +50,7 @@ Launch Front-end:
 In your Database tool :
 Create a table `ocrental` and give privileges to a user named `ocuser` with password `ocuser`
 SQL script for creating the schema is available `ressources/sql/script.sql`
+Execut it and use the app to create a user.
 
 Or you can import the SQL file on the ZIP file and use all data by logging with 
 `test@test.fr` and `123456` password.
